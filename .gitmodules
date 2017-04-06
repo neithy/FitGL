@@ -1,3 +1,6 @@
 [submodule "prebuild"]
 	path = prebuild
 	url = https://github.com/neithy/FitGL_prebuild.git
+[submodule "Resources"]
+	path = Resources
+	url = https://github.com/neithy/FitGL_resources.git
