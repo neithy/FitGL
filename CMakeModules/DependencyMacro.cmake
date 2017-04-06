@@ -1,0 +1,6 @@
+macro(ge_use_modules target)
+   set(_modules ${ARGN})
+   foreach(_module ${_modules})
+      message("${_module}")
+   endforeach()
+endmacro()
