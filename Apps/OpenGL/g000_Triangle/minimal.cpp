@@ -24,6 +24,9 @@ int main(int /*argc*/, char ** /*argv*/) {
   ProgramShared program;
   VertexArrayShared vao;
 
+  GLuint buf;
+  glCreateBuffers(1, &buf);
+
   app.addInitCallback([&](){
     vao = std::make_shared<VertexArray>();
     auto vs = compileShader(GL_VERTEX_SHADER, vsrc);

@@ -1,5 +1,7 @@
-#include <BaseApp.h>
+#include "FitGL.h"
 #include <map>
+
+using namespace std;
 
 std::string vert = R".(
 #version 430
@@ -96,20 +98,35 @@ vec3 lambert(vec3 pos, vec3 norm, vec3 color,
 
 void main() {
   vec3 color = vec3(1);
+
+  if(pos.y<=-0.5){
+    color = vec3(0.3,0.6,0.3);
+  }
+  if(pos.y>-0.5){
+    float t = (pos.y+0.5)*2;
+    color =  (1-t)*vec3(0.3,0.6,0.3)+t*vec3(0.7,0.4,0.3);
+  }
+  if(pos.y>0.0){
+    float t = (pos.y);
+    color =  (1-t)*vec3(0.7,0.4,0.3)+t*vec3(1);
+  }
+  if(pos.y>1) color = vec3(1);
+
+  
 	fragColor = vec4(lambert(pos,normal,color,vec3(5000,5000,500),vec3(0.6),vec3(0.4)),1);
 }).";
 
 
 
 int main(int /*argc*/, char ** /*argv*/) {
-  BaseApp app;
+  OpenGLApp app;
   GLuint vao;
-  ProgramObject program;
+  ProgramShared program;
 
-  PerspectiveCamera cam;
-  OrbitManipulator manipulator(&cam);
-  manipulator.setupCallbacks(app);
-  manipulator.setZoom(1);
+  PerspectiveCameraShared camera = make_shared<PerspectiveCamera>();
+  OrbitManipulatorShared manipulator = make_shared<OrbitManipulator>(camera);
+  manipulator->setupCallbacks(app);
+  manipulator->setZoom(1);
 
   int levels = 8;
   float weights[8];
@@ -137,14 +154,14 @@ int main(int /*argc*/, char ** /*argv*/) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
 
-    program.use();
-    program.setMatrix4fv("p", value_ptr(cam.getProjection()));
-    program.setMatrix4fv("v", value_ptr(cam.getView()));
-    program.set2f("center", cam.getCenter().x, cam.getCenter().z);
-    program.set1i("levels", levels);
+    program->use();
+    program->setMatrix4fv("p", value_ptr(camera->getProjection()));
+    program->setMatrix4fv("v", value_ptr(camera->getView()));
+    program->set2f("center", camera->getCenter().x, camera->getCenter().z);
+    program->set1i("levels", levels);
     for (int i = 0; i < 8; i++) {
       std::string label = "weights[" + std::to_string(i) + "]";
-      program.set1f(label, weights[i]);
+      program->set1f(label, weights[i]);
     }
 
     

@@ -8,7 +8,7 @@ int main(int /*argc*/, char ** /*argv*/) {
 	auto mainWindow = app.getMainWindow();
 
 	std::string prefix = RESOURCE_DIR"shaders/";
-	std::string texPrefix = RESOURCE_DIR"data/Textures/";
+	std::string texPrefix = RESOURCE_DIR"Textures/";
 
 	TextureShared texture[9];
 

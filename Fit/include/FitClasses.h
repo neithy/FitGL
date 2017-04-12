@@ -14,4 +14,5 @@ namespace fit {
     Fit_class(Manipulator);
     Fit_class(OrbitManipulator);
     Fit_class(Image);
+	Fit_class(FileWatcher);
 };

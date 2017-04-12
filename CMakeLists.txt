@@ -53,6 +53,10 @@ add_subdirectory(3rdParty/imgui)
 add_subdirectory(Fit)
 add_subdirectory(FitGL)
 
-add_subdirectory(Apps/OpenGL)
-
+file(GLOB dirs  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} Apps/*)
+foreach(dir ${dirs})
+	if(IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${dir})
+		add_subdirectory(${dir})
+	endif()
+endforeach()
 

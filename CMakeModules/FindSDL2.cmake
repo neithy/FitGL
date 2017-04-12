@@ -121,7 +121,7 @@ if(NOT ${CMAKE_FIND_PACKAGE_NAME}_FOUND)
             NAMES SDL2main
             HINTS
             $ENV{SDL2DIR}
-            $ENV{SDL_2DIR}
+            $ENV{SDL2_DIR}
             PATH_SUFFIXES lib64 lib
             PATHS ${SDL2_SEARCH_PATHS}
          )

@@ -19,3 +19,4 @@
 #include "Loader.h"
 #include "Camera.h"
 #include "Manipulator.h"
+#include "FileWatcher.h"

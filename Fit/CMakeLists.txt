@@ -30,6 +30,7 @@ set(includes
 	${HEADER_PATH}/Camera.h
 	${HEADER_PATH}/Manipulator.h
 	${HEADER_PATH}/Image.h
+	${HEADER_PATH}/FileWatcher.h
   )
 
 set(sources
@@ -43,6 +44,7 @@ set(sources
 	src/Gui.cpp
 	src/Manipulator.cpp
 	src/Camera.cpp
+	src/FileWatcher.cpp
   )
 
 add_library(${LIB_NAME}
