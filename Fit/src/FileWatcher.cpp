@@ -42,21 +42,26 @@ void fit::FileWatcher::addDir(std::string fileName){
 
 void fit::FileWatcher::loop(){
 #ifdef WIN32
-	
-	auto file = dirs[0];
-	auto handle = FindFirstChangeNotification(file.c_str(), false, FILE_NOTIFY_CHANGE_LAST_WRITE);
-	if (handle == INVALID_HANDLE_VALUE)	{
-		std::cout << "handle invalid\n";
-	}
+  std::vector<void*> handles;
+  handles.push_back(interruptEvent);
+  for (auto& dir : dirs) {
+    auto handle = FindFirstChangeNotification(dir.c_str(), false, FILE_NOTIFY_CHANGE_LAST_WRITE);
+    
+    if (handle == INVALID_HANDLE_VALUE) {
+      //std::cout << "handle invalid\n";
+    } else {
+      handles.push_back(handle);
+    }
+  }
 	
 	while (!stopFlag) {
-		std::cout << "waiting... \n";
-		void* handles[] = { handle, interruptEvent };
-		auto wait = WaitForMultipleObjects(2, handles, false, INFINITE);
-		FindNextChangeNotification(handle);
-		std::cout << wait << "\n";
-
-		std::cout << " thread out\n";
+		auto wait = WaitForMultipleObjects(handles.size(), handles.data(), false, INFINITE);
+    //std::cout << "wait " << wait << "\n";
+    for (auto &h : handles)FindNextChangeNotification(h);
+    if (wait > WAIT_OBJECT_0 && wait <= WAIT_OBJECT_0 + handles.size()) {
+      if (callback)callback();
+      //std::cout << "change, callback\n";
+    }
 	}
 
 #endif

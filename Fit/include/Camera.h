@@ -60,8 +60,8 @@ protected:
 	glm::mat4 vp;
 	glm::mat4 view;
 	glm::mat4 projection;
-	glm::vec3 center;
-	glm::vec3 eye;
+  glm::vec3 eye; 
+  glm::vec3 center;	
 	glm::vec3 up;
 	bool dirty = true;
 };
