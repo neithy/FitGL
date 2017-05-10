@@ -3157,6 +3157,7 @@ const unsigned short bunny[2092][3] = {
 };
 
 inline void bunnyInit(GLuint &vao, GLuint &vbo, GLuint &ebo){
+  using namespace ge::gl;
   glCreateBuffers(1, &vbo);
   glNamedBufferData(vbo, sizeof(bunnyVertices), bunnyVertices, GL_STATIC_DRAW);
   glCreateBuffers(1, &ebo);
@@ -3170,6 +3171,7 @@ inline void bunnyInit(GLuint &vao, GLuint &vbo, GLuint &ebo){
 }
 
 inline void bunnyDraw(GLuint vao) {
+  using namespace ge::gl;
   glBindVertexArray(vao);
   glDrawElements(GL_TRIANGLES, sizeof(bunny) / sizeof(short), GL_UNSIGNED_SHORT, 0);
 }
