@@ -9,6 +9,7 @@
 
 #include "OpenGLApp.h"
 #include "ShaderUtils.h"
+#include "TimingMonitorGL.h"
 
 using namespace fit;
 using namespace ge::gl;

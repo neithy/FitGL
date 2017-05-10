@@ -6,4 +6,5 @@
 
 namespace fit {
   FitGL_class(OpenGLApp);
+  FitGL_class(TimingMonitorGL);
 };

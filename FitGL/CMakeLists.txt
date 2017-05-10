@@ -13,11 +13,13 @@ set(includes
 	${HEADER_PATH}/geGLClasses.h
 	${HEADER_PATH}/ShaderUtils.h
 	${HEADER_PATH}/LoaderGL.h
+	${HEADER_PATH}/TimingMonitorGL.h
   )
 
 set(sources
 	src/OpenGLApp.cpp
 	src/LoaderTextureGL.cpp
+	src/TimingMonitorGL.cpp
   )
 
 add_library(${LIB_NAME}
