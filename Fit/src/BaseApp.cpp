@@ -80,6 +80,13 @@ SDLWindowShared BaseApp::addWindow(int width, int height, bool resizable, bool f
 	return addWindow(make_shared<SDLWindow>(width, height, resizable, fullscreen, multisample));
 }
 
+SDLWindowShared BaseApp::getWindowByID(int id) {
+  for(auto &w:windows) {
+    if (w->getId() == id)return w;
+  }
+  return nullptr;
+}
+
 void BaseApp::removeWindow(SDLWindowShared & window) {  
   window->hide();
   eventCallbacks.erase(remove_if(eventCallbacks.begin(), eventCallbacks.end(), [&](EventCallbackFilterID c) {return c.window == window->getId(); }), eventCallbacks.end());

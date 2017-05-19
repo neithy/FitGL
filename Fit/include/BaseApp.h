@@ -33,6 +33,7 @@ public:
   SDLWindowShared addWindow(SDLWindowShared &window);
   SDLWindowShared addWindow(int width = 1024, int height = 768, bool resizable = true, bool fullscreen = false, int multisample = 1);
   SDLWindowShared getWindow(int i) { return windows[i]; }
+  SDLWindowShared getWindowByID(int id);
   SDLWindowShared getMainWindow() { return mainWindow; }
   void removeWindow(SDLWindowShared &window);
 

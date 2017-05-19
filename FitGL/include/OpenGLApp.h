@@ -27,4 +27,7 @@ protected:
   void handleEvent(SDL_Event const &e) override;
 	void enableDebug();
 	void initGL(Options const&options);
+
+  ImGuiContext* getImGuiContext(int id);
+  std::map<int, ImGuiContext*> imguiContexts;
 };

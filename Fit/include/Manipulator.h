@@ -10,7 +10,7 @@ public:
   CameraWeak getCamera() const { return camera;}
 
 	virtual void update(float dt) {}
-	virtual void setupCallbacks(fit::BaseApp &app) {}
+	virtual void setupCallbacks(fit::BaseApp &app, int windowID =-1) {}
 	
 protected:
 	CameraWeak camera;
@@ -23,7 +23,7 @@ public:
 	virtual ~OrbitManipulator() {}
 
   void update(float dt) override;
-  void setupCallbacks(fit::BaseApp &app) override;
+  void setupCallbacks(fit::BaseApp &app, int windowID = -1) override;
 
 	void setZoom(float z) { zoom = z; }
 	void setRotationX(float x) { movex = x; }

@@ -142,3 +142,7 @@ void SDLWindow::setFullscreen(Fullscreen const&type) {
 void SDLWindow::setTitle(std::string const & title) {
   SDL_SetWindowTitle(m_window, title.c_str());
 }
+
+void SDLWindow::focus() {
+  SDL_RaiseWindow(m_window);
+}

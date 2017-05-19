@@ -70,6 +70,7 @@ public:
 
   void setFullscreen(Fullscreen const& type);
   void setTitle(std::string const& title);
+  void focus();
   SDL_Window* getWindowHandle() { return m_window; }
 protected:
   using SharedSDLContext = std::shared_ptr<SDL_GLContext>;

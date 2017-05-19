@@ -57,15 +57,15 @@ void OrbitManipulator::update(float dt) {
   cam->setCenter(center);
 }
 
-void OrbitManipulator::setupCallbacks(BaseApp & app) {
+void OrbitManipulator::setupCallbacks(BaseApp & app, int windowID) {
 	app.addMousePressCallback([&](Uint8 c, int x, int y) {
 		mouseButton[c] = true;
 		//if (mouseButton[1] || mouseButton[3]) SDL_SetRelativeMouseMode(SDL_TRUE);
-	});
+	}, windowID);
 	app.addMouseReleaseCallback([&](Uint8 c, int x, int y) {
 		mouseButton[c] = false;
 		//if (!(mouseButton[1] || mouseButton[3])) SDL_SetRelativeMouseMode(SDL_FALSE);
-	});
+	}, windowID);
 	app.addMouseMoveCallback([&](int dx, int dy, int x, int y) {
 		if (mouseButton[1] || mouseButton[3]) {
 			movex += dx;
@@ -76,17 +76,17 @@ void OrbitManipulator::setupCallbacks(BaseApp & app) {
 			dragx += dx;
 			dragy += dy;
 		}
-	});
+	}, windowID);
 	app.addMouseWheelCallback([&](int dy) {
 		if (dy < 0) zoom *= 1.1;
 		else zoom /= 1.1;
-	});
+	},windowID);
 	app.addKeyPressCallback([&](SDL_Keycode key, Uint16) {
 		if (key < 256)keymap[key] = true;
-	});
+	}, windowID);
 	app.addKeyReleaseCallback([&](SDL_Keycode key, Uint16) {
 		if (key < 256)keymap[key] = false;
-	});
+	}, windowID);
 
 	app.addUpdateCallback([&](float dt) {
 		update(dt);
