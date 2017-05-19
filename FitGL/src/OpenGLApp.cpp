@@ -59,6 +59,7 @@ ImGuiContext* OpenGLApp::getImGuiContext(int id) {
     context = ImGui::CreateContext(malloc, free);
     ImGui::SetCurrentContext(context);
     auto w = this->getWindowByID(id);
+    if (!w)return nullptr;
     ImGui_ImplSdlGL3_Init(w->getWindowHandle());
     imguiContexts[w->getId()] = context;
   }
@@ -74,6 +75,7 @@ void OpenGLApp::handleIdle() {
     glViewport(0, 0, w->getWidth(), w->getHeight());
 
     auto* guiContext = getImGuiContext(w->getId());
+    if (!guiContext)continue;
     ImGui::SetCurrentContext(guiContext);
     ImGui_ImplSdlGL3_NewFrame(w->getWindowHandle());
 
@@ -86,10 +88,11 @@ void OpenGLApp::handleIdle() {
 }
 
 void OpenGLApp::handleEvent(SDL_Event const& e) {
-  auto context =getImGuiContext(e.window.windowID);
-  assert(context);
-  ImGui::SetCurrentContext(context);
-  ImGui_ImplSdlGL3_ProcessEvent(const_cast<SDL_Event*>(&e));
+  auto context = getImGuiContext(e.window.windowID);
+  if (context){
+    ImGui::SetCurrentContext(context);
+    ImGui_ImplSdlGL3_ProcessEvent(const_cast<SDL_Event*>(&e));
+  }
   BaseApp::handleEvent(e);
 }
 
